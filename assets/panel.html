@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>9-Slice Editor</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #1e1e1e;
+      color: #e8e8e8;
+      font-family: -apple-system, sans-serif;
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    header {
+      background: #2a2a2a;
+      border-bottom: 1px solid #3a3a3a;
+      padding: 10px 12px;
+      flex-shrink: 0;
+    }
+    header h1 { font-size: 13px; font-weight: 600; }
+
+    .canvas-area {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #111;
+    }
+
+    #canvas-wrap {
+      position: relative;
+      display: inline-block;
+    }
+
+    #preview-img {
+      display: block;
+      max-width: 560px;
+      max-height: 380px;
+      image-rendering: pixelated;
+    }
+
+    .guide {
+      position: absolute;
+      background: rgba(255, 60, 60, 0.85);
+      cursor: grab;
+      z-index: 10;
+    }
+    .guide:active { cursor: grabbing; }
+    .guide.horizontal { left: 0; right: 0; height: 2px; margin-top: -1px; }
+    .guide.vertical   { top: 0; bottom: 0; width: 2px; margin-left: -1px; }
+
+    .guide-label {
+      position: absolute;
+      background: rgba(200, 40, 40, 0.95);
+      color: #fff;
+      font-size: 10px;
+      padding: 1px 4px;
+      border-radius: 2px;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .guide.horizontal .guide-label { top: 3px; left: 4px; }
+    .guide.vertical   .guide-label { left: 3px; top: 4px; }
+
+    footer {
+      background: #2a2a2a;
+      border-top: 1px solid #3a3a3a;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .inputs {
+      display: flex;
+      gap: 10px;
+      flex: 1;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .input-all {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      width: 100%;
+      padding-top: 4px;
+      border-top: 1px solid #3a3a3a;
+      margin-top: 2px;
+    }
+    .input-all label {
+      font-size: 11px;
+      color: #888;
+      white-space: nowrap;
+    }
+    .input-all input {
+      flex: 1;
+      background: #333;
+      border: 1px solid #555;
+      border-radius: 4px;
+      color: #e8e8e8;
+      font-size: 12px;
+      font-family: -apple-system, sans-serif;
+      padding: 3px 6px;
+      user-select: text;
+      -webkit-user-select: text;
+      outline: none;
+    }
+    .input-all input:focus { border-color: #0d7dff; }
+    .input-all input::placeholder { color: #666; }
+
+    .input-group {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .input-group label {
+      font-size: 11px;
+      color: #aaa;
+    }
+    .input-group input {
+      width: 48px;
+      background: #333;
+      border: 1px solid #555;
+      border-radius: 4px;
+      color: #e8e8e8;
+      font-size: 12px;
+      font-family: -apple-system, sans-serif;
+      padding: 3px 6px;
+      text-align: right;
+      user-select: text;
+      -webkit-user-select: text;
+      outline: none;
+    }
+    .input-group input:focus {
+      border-color: #0d7dff;
+    }
+
+    button {
+      padding: 6px 14px;
+      border: none;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: -apple-system, sans-serif;
+    }
+    .btn-apply  { background: #0d7dff; color: #fff; }
+    .btn-apply:hover  { background: #3394ff; }
+    .btn-cancel { background: #444; color: #e8e8e8; }
+    .btn-cancel:hover { background: #555; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>9-Slice Editor</h1>
+  </header>
+
+  <div class="canvas-area">
+    <div id="canvas-wrap">
+      <img id="preview-img" draggable="false" />
+    </div>
+  </div>
+
+  <footer>
+    <div class="inputs">
+      <div class="input-group">
+        <label for="in-top">top</label>
+        <input id="in-top" type="number" min="1" value="0" />
+      </div>
+      <div class="input-group">
+        <label for="in-right">right</label>
+        <input id="in-right" type="number" min="1" value="0" />
+      </div>
+      <div class="input-group">
+        <label for="in-bottom">bottom</label>
+        <input id="in-bottom" type="number" min="1" value="0" />
+      </div>
+      <div class="input-group">
+        <label for="in-left">left</label>
+        <input id="in-left" type="number" min="1" value="0" />
+      </div>
+      <div class="input-all">
+        <label for="in-all">top,right,bottom,left</label>
+        <input id="in-all" type="text" placeholder="e.g. 20,20,20,20" autocomplete="off" />
+      </div>
+    </div>
+    <button class="btn-cancel" id="btn-cancel">Cancel</button>
+    <button class="btn-apply" id="btn-apply">Apply 9-Slice</button>
+  </footer>
+
+  <script src="panel.js"></script>
+</body>
+</html>

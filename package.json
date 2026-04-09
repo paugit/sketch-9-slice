@@ -1,0 +1,31 @@
+{
+  "name": "sketch-9-slice",
+  "description": "Apply 9-slice scaling to images in Sketch.",
+  "version": "1.0.0",
+  "engines": {
+    "sketch": ">=70.0"
+  },
+  "skpm": {
+    "name": "9-Slice",
+    "manifest": "src/manifest.json",
+    "main": "sketch-9-slice.sketchplugin",
+    "assets": [
+      "assets/**/*"
+    ]
+  },
+  "scripts": {
+    "build": "skpm-build",
+    "watch": "skpm-build --watch",
+    "start": "skpm-build --watch --run",
+    "postinstall": "npm run build && skpm-link"
+  },
+  "devDependencies": {
+    "@skpm/builder": "^0.9.5",
+    "sketch-module-web-view": "^3.5.3"
+  },
+  "author": "pmjo <pmjo@pmjo.org>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paugit/sketch-9-slice.git"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://raw.githubusercontent.com/sketch-hq/SketchAPI/develop/docs/sketch-plugin-manifest-schema.json",
+  "name": "9-Slice",
+  "description": "Apply 9-slice scaling to images in Sketch.",
+  "author": "pmjo",
+  "authorEmail": "pmjo@pmjo.org",
+  "version": "1.0.0",
+  "identifier": "org.pmjo.sketch.9slice-plugin",
+  "compatibleVersion": "70",
+  "bundleVersion": 1,
+  "icon": "icon.png",
+  "disableCocoaScriptPreprocessor": true,
+  "commands": [
+    {
+      "name": "Apply 9-Slice...",
+      "identifier": "org.pmjo.sketch.9slice-plugin.open-panel",
+      "shortcut": "ctrl shift 9",
+      "script": "./openPanel.js"
+    },
+    {
+      "name": "Remove 9-Slice",
+      "identifier": "org.pmjo.sketch.9slice-plugin.remove-9slice",
+      "script": "./remove9slice.js"
+    }
+  ],
+  "menu": {
+    "title": "9-Slice",
+    "items": [
+      "org.pmjo.sketch.9slice-plugin.open-panel",
+      "org.pmjo.sketch.9slice-plugin.remove-9slice"
+    ]
+  }
+}
