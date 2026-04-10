@@ -4,7 +4,7 @@
   "description": "Apply 9-slice scaling to images in Sketch.",
   "author": "pmjo",
   "authorEmail": "pmjo@pmjo.org",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "identifier": "org.pmjo.sketch.9slice-plugin",
   "compatibleVersion": "70",
   "bundleVersion": 1,

@@ -1,5 +1,7 @@
 # 9-Slice Plugin for Sketch
 
+![Demo](demo.gif)
+
 Apply 9-slice scaling to images in Sketch. Select an image layer, define the slice insets using a visual editor, and the plugin converts it into a resizable Symbol with correctly pinned and stretched regions.
 
 Useful for mockuping 9-slice image based UIs before implementing them in Roblox, Unity, or any other game engine that supports 9-slice images.

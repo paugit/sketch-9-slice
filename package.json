@@ -1,7 +1,7 @@
 {
   "name": "sketch-9-slice",
   "description": "Apply 9-slice scaling to images in Sketch.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "engines": {
     "sketch": ">=70.0"
   },
@@ -17,7 +17,7 @@
     "build": "skpm-build",
     "watch": "skpm-build --watch",
     "start": "skpm-build --watch --run",
-    "postinstall": "npm run build && skpm-link"
+    "postinstall": "npm run build && ./node_modules/.bin/skpm-link"
   },
   "devDependencies": {
     "@skpm/builder": "^0.9.5",
