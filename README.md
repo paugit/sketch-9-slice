@@ -14,7 +14,7 @@ Useful for mockuping 9-slice image based UIs before implementing them in Roblox,
 
 1. Select an Image layer
 2. Run **Plugins → 9-Slice → Apply 9-Slice…** (or `⌃⇧9`)
-3. Drag the guide lines or enter inset values manually
+3. Drag the guide lines or enter inset values manually. Use **Center** to place guides symmetrically, or the zoom slider to resize the preview.
 4. Click **Apply 9-Slice** — the image is replaced with a Symbol
 
 ### Remove 9-Slice
