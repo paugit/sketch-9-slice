@@ -210,10 +210,16 @@ document.getElementById('btn-apply').addEventListener('click', function() {
 });
 
 document.getElementById('btn-center').addEventListener('click', function() {
-  guides.top    = Math.floor(imgH / 2);
-  guides.bottom = guides.top;
-  guides.left   = Math.floor(imgW / 2);
-  guides.right  = guides.left;
+  var h = Math.floor(imgH / 2);
+  var w = Math.floor(imgW / 2);
+  guides.top    = h;
+  guides.bottom = h;
+  guides.top    = clampTop(guides.top);
+  guides.bottom = clampBottom(guides.bottom);
+  guides.left   = w;
+  guides.right  = w;
+  guides.left   = clampLeft(guides.left);
+  guides.right  = clampRight(guides.right);
   renderGuides();
   updateInputs();
 });
