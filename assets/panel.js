@@ -209,6 +209,15 @@ document.getElementById('btn-apply').addEventListener('click', function() {
   });
 });
 
+document.getElementById('btn-center').addEventListener('click', function() {
+  guides.top    = Math.floor(imgH / 2);
+  guides.bottom = imgH - guides.top;
+  guides.left   = Math.floor(imgW / 2);
+  guides.right  = imgW - guides.left;
+  renderGuides();
+  updateInputs();
+});
+
 document.getElementById('btn-cancel').addEventListener('click', function() {
   window.postMessage('cancel');
 });

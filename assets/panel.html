@@ -104,6 +104,14 @@
       flex-wrap: wrap;
     }
 
+    .inputs-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+    }
+    .inputs-row .spacer { flex: 1; }
+
     .input-all {
       display: flex;
       align-items: center;
@@ -172,6 +180,8 @@
     }
     .btn-apply  { background: #0d7dff; color: #fff; }
     .btn-apply:hover  { background: #3394ff; }
+    .btn-center { background: #333; color: #aaa; border: 1px solid #555; padding: 3px 8px; font-size: 11px; }
+    .btn-center:hover { background: #444; color: #e8e8e8; }
     .btn-cancel { background: #444; color: #e8e8e8; }
     .btn-cancel:hover { background: #555; }
   </style>
@@ -194,29 +204,33 @@
 
   <footer>
     <div class="inputs">
-      <div class="input-group">
-        <label for="in-top">top</label>
-        <input id="in-top" type="number" min="1" value="0" />
-      </div>
-      <div class="input-group">
-        <label for="in-right">right</label>
-        <input id="in-right" type="number" min="1" value="0" />
-      </div>
-      <div class="input-group">
-        <label for="in-bottom">bottom</label>
-        <input id="in-bottom" type="number" min="1" value="0" />
-      </div>
-      <div class="input-group">
-        <label for="in-left">left</label>
-        <input id="in-left" type="number" min="1" value="0" />
+      <div class="inputs-row">
+        <div class="input-group">
+          <label for="in-top">top</label>
+          <input id="in-top" type="number" min="1" value="0" />
+        </div>
+        <div class="input-group">
+          <label for="in-right">right</label>
+          <input id="in-right" type="number" min="1" value="0" />
+        </div>
+        <div class="input-group">
+          <label for="in-bottom">bottom</label>
+          <input id="in-bottom" type="number" min="1" value="0" />
+        </div>
+        <div class="input-group">
+          <label for="in-left">left</label>
+          <input id="in-left" type="number" min="1" value="0" />
+        </div>
+        <div class="spacer"></div>
+        <button type="button" class="btn-center" id="btn-center">Center</button>
       </div>
       <div class="input-all">
         <label for="in-all">top,right,bottom,left</label>
         <input id="in-all" type="text" placeholder="e.g. 20,20,20,20" autocomplete="off" />
       </div>
     </div>
-    <button class="btn-cancel" id="btn-cancel">Cancel</button>
-    <button class="btn-apply" id="btn-apply">Apply 9-Slice</button>
+    <button type="button" class="btn-cancel" id="btn-cancel">Cancel</button>
+    <button type="button" class="btn-apply" id="btn-apply">Apply 9-Slice</button>
   </footer>
 
   <script src="panel.js"></script>

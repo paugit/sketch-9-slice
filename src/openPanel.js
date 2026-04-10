@@ -14,7 +14,7 @@ export default function(context) {
   const layer = selection[0];
   const W = layer.frame.width;
   const H = layer.frame.height;
-  const defaultInset = Math.round(Math.min(W, H) * 0.2 / 5) * 5 || 10;
+  const defaultInset = Math.round(Math.min(W, H) * 0.3 / 5) * 5 || 10;
 
   // Save image to temp PNG file
   const imageData = layer.sketchObject.image();
@@ -32,8 +32,8 @@ export default function(context) {
   // No fixed identifier — each invocation gets a fresh BrowserWindow,
   // preventing duplicate event listeners if the user opens the panel twice.
   const win = new BrowserWindow({
-    width: 620,
-    height: 540,
+    width: 640,
+    height: 480,
     title: '9-Slice Editor',
     backgroundColor: '#1e1e1e',
     show: false,
