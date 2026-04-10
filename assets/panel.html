@@ -24,15 +24,30 @@
       border-bottom: 1px solid #3a3a3a;
       padding: 10px 12px;
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
     }
-    header h1 { font-size: 13px; font-weight: 600; }
+    header h1 { font-size: 13px; font-weight: 600; flex: 1; }
+
+    .zoom-control {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .zoom-control label { font-size: 11px; color: #aaa; }
+    .zoom-control input[type=range] {
+      width: 90px;
+      accent-color: #0d7dff;
+      cursor: pointer;
+    }
+    #zoom-value { font-size: 11px; color: #e8e8e8; width: 36px; text-align: right; }
 
     .canvas-area {
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      overflow: auto;
       background: #111;
     }
 
@@ -43,8 +58,6 @@
 
     #preview-img {
       display: block;
-      max-width: 560px;
-      max-height: 380px;
       image-rendering: pixelated;
     }
 
@@ -166,6 +179,11 @@
 <body>
   <header>
     <h1>9-Slice Editor</h1>
+    <div class="zoom-control">
+      <label for="zoom-slider">Zoom</label>
+      <input id="zoom-slider" type="range" min="25" max="400" step="5" value="100" />
+      <span id="zoom-value">100%</span>
+    </div>
   </header>
 
   <div class="canvas-area">

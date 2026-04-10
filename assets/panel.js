@@ -9,16 +9,43 @@ var inBottom = document.getElementById('in-bottom');
 var inLeft   = document.getElementById('in-left');
 
 var imgW = 0, imgH = 0;
+var fitW = 0, fitH = 0;
 
 // Guide insets in image coordinates (points)
 var guides = { top: 0, right: 0, bottom: 0, left: 0 };
+
+// ── Zoom ───────────────────────────────────────────────────────────────────
+var zoomSlider = document.getElementById('zoom-slider');
+var zoomValue  = document.getElementById('zoom-value');
+
+function applyZoom() {
+  var pct = parseInt(zoomSlider.value, 10);
+  var scale = pct / 100;
+  img.style.width  = Math.round(fitW * scale) + 'px';
+  img.style.height = Math.round(fitH * scale) + 'px';
+  zoomValue.textContent = pct + '%';
+  renderGuides();
+}
+
+zoomSlider.addEventListener('input', applyZoom);
 
 // ── Receive data from plugin ───────────────────────────────────────────────
 window.receiveImageData = function(filePath, w, h, defaultInset) {
   imgW = w; imgH = h;
   img.src = 'file://' + filePath;
   guides.top = guides.right = guides.bottom = guides.left = defaultInset;
-  img.onload = function() { renderGuides(); updateInputs(); };
+  img.onload = function() {
+    var maxW = 560, maxH = 380;
+    var scale = Math.min(maxW / imgW, maxH / imgH, 1);
+    fitW = Math.round(imgW * scale);
+    fitH = Math.round(imgH * scale);
+    zoomSlider.value = '100';
+    zoomValue.textContent = '100%';
+    img.style.width  = fitW + 'px';
+    img.style.height = fitH + 'px';
+    renderGuides();
+    updateInputs();
+  };
 };
 
 // ── Coordinate helpers ─────────────────────────────────────────────────────
