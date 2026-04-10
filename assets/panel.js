@@ -59,10 +59,10 @@ function pxToImg(val, axis) {
 }
 
 // ── Clamp helpers ──────────────────────────────────────────────────────────
-function clampTop(v)    { return Math.max(1, Math.min(v, imgH - guides.bottom)); }
-function clampBottom(v) { return Math.max(1, Math.min(v, imgH - guides.top)); }
-function clampLeft(v)   { return Math.max(1, Math.min(v, imgW - guides.right)); }
-function clampRight(v)  { return Math.max(1, Math.min(v, imgW - guides.left)); }
+function clampTop(v)    { return Math.max(1, Math.min(v, imgH - guides.bottom - 1)); }
+function clampBottom(v) { return Math.max(1, Math.min(v, imgH - guides.top    - 1)); }
+function clampLeft(v)   { return Math.max(1, Math.min(v, imgW - guides.right  - 1)); }
+function clampRight(v)  { return Math.max(1, Math.min(v, imgW - guides.left   - 1)); }
 
 // ── Render guide lines ─────────────────────────────────────────────────────
 function renderGuides() {
@@ -211,9 +211,9 @@ document.getElementById('btn-apply').addEventListener('click', function() {
 
 document.getElementById('btn-center').addEventListener('click', function() {
   guides.top    = Math.floor(imgH / 2);
-  guides.bottom = imgH - guides.top;
+  guides.bottom = guides.top;
   guides.left   = Math.floor(imgW / 2);
-  guides.right  = imgW - guides.left;
+  guides.right  = guides.left;
   renderGuides();
   updateInputs();
 });
