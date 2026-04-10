@@ -32,10 +32,10 @@ function pxToImg(val, axis) {
 }
 
 // ── Clamp helpers ──────────────────────────────────────────────────────────
-function clampTop(v)    { return Math.max(1, Math.min(v, imgH - guides.bottom - 1)); }
-function clampBottom(v) { return Math.max(1, Math.min(v, imgH - guides.top    - 1)); }
-function clampLeft(v)   { return Math.max(1, Math.min(v, imgW - guides.right  - 1)); }
-function clampRight(v)  { return Math.max(1, Math.min(v, imgW - guides.left   - 1)); }
+function clampTop(v)    { return Math.max(1, Math.min(v, imgH - guides.bottom)); }
+function clampBottom(v) { return Math.max(1, Math.min(v, imgH - guides.top)); }
+function clampLeft(v)   { return Math.max(1, Math.min(v, imgW - guides.right)); }
+function clampRight(v)  { return Math.max(1, Math.min(v, imgW - guides.left)); }
 
 // ── Render guide lines ─────────────────────────────────────────────────────
 function renderGuides() {
